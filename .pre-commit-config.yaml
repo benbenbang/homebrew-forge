@@ -1,0 +1,32 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+      - id: pretty-format-json
+        args:
+          - --autofix
+          - --indent=2
+      - id: trailing-whitespace
+      - id: requirements-txt-fixer
+      - id: check-added-large-files
+        args:
+          - --maxkb=1024
+        stages:
+          - pre-commit
+      - id: check-yaml
+        args:
+          - --allow-multiple-documents
+          - --unsafe
+      - id: debug-statements
+  - repo: local
+    hooks:
+      - id: validate-commit-msg
+        name: commit message is valid
+        args:
+          - --negate
+        entry: ^(build|ci|docs|feat|fix|perf|refactor|style|test|revert|hotfix|ops|chore)\([\w,\.,\-,\(,\),\/]+\)(!?)(:)\s{1}([\w,\W,:]+)$
+        language: pygrep
+        stages:
+          - commit-msg
