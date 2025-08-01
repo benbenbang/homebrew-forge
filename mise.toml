@@ -1,0 +1,3 @@
+[tasks.setup-completions]
+
+dir = "{{config_root}}"
