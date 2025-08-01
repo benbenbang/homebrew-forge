@@ -30,6 +30,7 @@ make build
 
 ### Example Formulas
 
+- **preconf-cli** - Pre-commit configuration generator (complete example)
 - **tomlv** - TOML validator tool (working example)
 
 ## Installation
@@ -78,14 +79,18 @@ make build
 ### Install via Homebrew Tap
 
 ```bash
+# Set up GitHub authentication (required for private repo)
+export HOMEBREW_GITHUB_API_TOKEN="your_github_token"
+
 # Add the private tap (requires GitHub access)
-brew tap benbenbang/forge
+brew tap benbenbang/forge git@github.com:benbenbang/homebrew-forge.git
 
 # Install forge
 brew install forge
 
 # Install example tools
-brew install tomlv
+brew install preconf-cli  # Pre-commit configuration generator
+brew install tomlv        # TOML validator
 ```
 
 ## Usage
