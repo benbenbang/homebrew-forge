@@ -172,46 +172,41 @@ usage() {
     exit 1
 }
 
-# Main execution - parse command and dispatch to appropriate function
-main() {
-    local command="$1"
+# Main execution - direct argument handling (no function wrapper)
 
-    # Show usage if no command provided
-    if [[ -z "$command" ]]; then
+# Main execution
+command="$1"
+
+# Show usage if no command provided
+if [[ -z "$command" ]]; then
+    usage
+fi
+
+case "$command" in
+    init)
+        init "$2" "$3"
+        ;;
+    audit)
+        audit "$2"
+        ;;
+    install)
+        install "$2"
+        ;;
+    test)
+        test_formula "$2"
+        ;;
+    validate)
+        validate "$2"
+        ;;
+    dev)
+        dev "$2"
+        ;;
+    help|--help|-h)
         usage
-    fi
-
-    # shift  # Remove command from arguments
-
-    case "$command" in
-        init)
-            init "$1" "$2"
-            ;;
-        audit)
-            audit "$1"
-            ;;
-        install)
-            install "$1"
-            ;;
-        test)
-            test_formula "$1"
-            ;;
-        validate)
-            validate "$1"
-            ;;
-        dev)
-            dev "$1"
-            ;;
-        help|--help|-h)
-            usage
-            ;;
-        *)
-            echo "❌ Unknown command: '$command'"
-            echo ""
-            usage
-            ;;
-    esac
-}
-
-# Run main function with all arguments
-main "$@"
+        ;;
+    *)
+        echo "❌ Unknown command: '$command'"
+        echo ""
+        usage
+        ;;
+esac
