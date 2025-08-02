@@ -6,7 +6,7 @@ class Tomlv < Formula
   desc "TOML validator and formatter"
   homepage "https://github.com/BurntSushi/toml"
   url "https://github.com/BurntSushi/toml/archive/refs/tags/v1.5.0.tar.gz"
-  sha256 ""
+  sha256 "723ede1a61ca8311046f840020e485dec3ceb2e614d1a539cd154375bdd7b8cb"
   license "MIT"
 
   depends_on "go" => :build
