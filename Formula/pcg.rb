@@ -9,7 +9,7 @@ class Pcg < Formula
   desc "Pre-commit configuration generator for development workflows"
   homepage "https://github.com/benbenbang/preconf-cli"
   version "1.0.3"
-  license "MIT"
+  license "Proprietary"
 
   # Platform-specific URLs using the custom download strategy
   if OS.mac? && Hardware::CPU.arm?
