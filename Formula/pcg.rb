@@ -2,13 +2,13 @@
 # frozen_string_literal: true
 
 # Include the custom download strategy
-require_relative "../custom_download_strategy"
+require_relative "../github_prv_repo_download_strategy"
 
 # Formula for pcg - Pre-commit configuration generator
 class Pcg < Formula
   desc "Pre-commit configuration generator for development workflows"
   homepage "https://github.com/benbenbang/preconf-cli"
-  version "1.0.3"
+  version "1.0.4"
   license "Proprietary"
 
   # Platform-specific URLs using the custom download strategy
