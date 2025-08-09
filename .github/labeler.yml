@@ -1,0 +1,13 @@
+workflows:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/**/*"
+          - ".pre-commit-config.json"
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - README.md
+          - "**/*.md"
+          - "docs/**/*.md"
+          - "docs/mkdocs.yml"
