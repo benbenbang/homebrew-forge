@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 # Include the custom download strategy
-require_relative "../github_prv_repo_download_strategy"
+require_relative "../scripts/github_prv_repo_download_strategy"
 
 # Formula for pcg - Pre-commit configuration generator
 class Pcg < Formula
