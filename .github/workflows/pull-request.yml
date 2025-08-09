@@ -1,0 +1,70 @@
+name: "pull request workflow"
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gen-app-token:
+    runs-on: ubuntu-latest
+    outputs:
+      app_token: ${{ steps.generate_token.outputs.token }}
+    permissions:
+      actions: write
+      packages: read
+    steps:
+      - name: generate a token # https://github.com/semantic-release/semantic-release/discussions/1906
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.TECHNICAL_APP_APP_ID  }}
+          private-key: ${{ secrets.TECHNICAL_APP_PEM }}
+
+  pre-commit:
+    uses: benbenbang/r-workflows/.github/workflows/pre-commit.yml@main
+    needs: gen-app-token
+    secrets:
+      token: ${{ needs.gen-app-token.outputs.app_token }}
+
+  verify-change-sha:
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'skip-sha-check') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: verify change sha
+        id: verify-change-sha
+        run: |
+          changes=$(git diff HEAD^ HEAD -- Formula/*.rb  | grep -E "sha256")
+          if [[ -z $changes ]]; then
+            echo "sha256 are not changed, please update sha256 in the *.rb file."
+            echo "if just an enhancement, you can add 'skip-sha-check' label to skip this check."
+            exit 1
+          fi
+
+  pr-labeler:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: pr labeler
+        uses: actions/labeler@v5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          configuration-path: .github/labeler.yml
