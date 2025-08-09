@@ -1,0 +1,69 @@
+name: "pull request workflow"
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-change-files:
+    name: check-changed-files
+    outputs:
+      verify_change_sha: ${{ steps.check-changes.outputs.verify_change_sha_any_changed }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: check changed files
+        id: check-changes
+        uses: tj-actions/changed-files@v46.0.1
+        with:
+          files_yaml: |
+            verify_change_sha:
+              - Formula/**/*.rb
+
+  pre-commit:
+    uses: benbenbang/homebrew-forge/.github/workflows/pre-commit.yml@workflows
+    secrets: inherit
+
+  verify-change-sha:
+    needs: check-change-files
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'skip-sha-check') && needs.check-change-files.outputs.verify_change_sha == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: verify change sha
+        id: verify-change-sha
+        run: |
+          changes=$(git diff HEAD^ HEAD -- Formula/*.rb  | grep -E "sha256")
+          if [[ -z $changes ]]; then
+            echo "sha256 are not changed, please update sha256 in the *.rb file."
+            echo "if just an enhancement, you can add 'skip-sha-check' label to skip this check."
+            exit 1
+          fi
+
+  pr-labeler:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: pr labeler
+        uses: actions/labeler@v5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          configuration-path: .github/labeler.yml
