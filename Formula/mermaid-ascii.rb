@@ -24,15 +24,8 @@ class MermaidAscii < Formula
   end
 
   def install
-    # Since we're downloading the binary directly, we need to handle it properly
-    # The cached_download gives us the path to the downloaded file
-    binary_path = cached_download
-
-    # Make it executable
-    chmod 0755, binary_path
-
-    # Install the binary
-    bin.install binary_path => "mermaid-ascii"
+    # Extract the tar.gz file and install the binary
+    bin.install "mermaid-ascii"
   end
 
   test do
