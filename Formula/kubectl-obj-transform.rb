@@ -39,11 +39,11 @@ class KubectlObjTransform < Formula
     chmod 0755, binary_path
 
     # Install the binary
-    bin.install binary_path => "kubectl-obj-transform"
+    bin.install binary_path => "kubectl-obj_transform"
   end
 
   test do
     # Test that the binary runs and shows help
-    assert_match "kubectl-obj-transform", shell_output("#{bin}/kubectl-obj-transform --help")
+    assert_match "kubectl-obj_transform", shell_output("#{bin}/kubectl-obj_transform --help")
   end
 end
