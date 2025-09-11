@@ -8,26 +8,26 @@ require_relative "../scripts/github_prv_repo_download_strategy"
 class Pcg < Formula
   desc "Pre-commit configuration generator for development workflows"
   homepage "https://github.com/benbenbang/preconf-cli"
-  version "1.3.0"
+  version "1.3.1"
   license "Proprietary"
 
   # Platform-specific URLs using the custom download strategy
   if OS.mac? && Hardware::CPU.arm?
     url "https://github.com/benbenbang/preconf-cli/releases/download/#{version}/pcg-darwin-arm64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "7827b90d75a57d55a73d7b9f4f9fb59369079044d4813e5e36a310e84a679cdd"
+    sha256 "106b678ae8bb8b761923ac5ceae6fd9110c46e602bf1c0f0a929e372e441ee18"
   elsif OS.mac? && Hardware::CPU.intel?
     url "https://github.com/benbenbang/preconf-cli/releases/download/#{version}/pcg-darwin-amd64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "1d714a150df1620ea34d65f97a336ccd7910032a647fa9b655143e8beab11730"
+    sha256 "246350205f98b6ba8f2e375cb7a0b3be03e4496418a17c71434f9a70e725e3c0"
   elsif OS.linux? && Hardware::CPU.arm?
     url "https://github.com/benbenbang/preconf-cli/releases/download/#{version}/pcg-linux-arm64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "f7313135c78097ff6f615cc5baa9bd2804649dfe4f124eff98f22c075d49a61d"
+    sha256 "79a05ef377d919641d24078c3b3ac257716803fd81797bbef3b105ba4a037bba"
   elsif OS.linux? && Hardware::CPU.intel?
     url "https://github.com/benbenbang/preconf-cli/releases/download/#{version}/pcg-linux-amd64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "2ff52f20f657924fe88824460495819e239f1b5a38d8723b74450afd55c18d78"
+    sha256 "35c0e0bb60cadad0e9465e8caea6bbb04495baa6107d397dc61b92f28614a260"
   end
 
   def install
