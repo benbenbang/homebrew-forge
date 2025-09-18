@@ -8,7 +8,7 @@ require_relative "../scripts/github_prv_repo_download_strategy"
 class Pcg < Formula
   desc "Project configuration generator for development workflows"
   homepage "https://github.com/benbenbang/prjconf-cli"
-  version "1.4.1"
+  version "1.5.0"
   license "Proprietary"
 
   # Platform-specific URLs using the custom download strategy
