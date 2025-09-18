@@ -15,19 +15,19 @@ class Pcg < Formula
   if OS.mac? && Hardware::CPU.arm?
     url "https://github.com/benbenbang/prjconf-cli/releases/download/#{version}/pcg-darwin-arm64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "b5d8a88f30f97c9e7505f7764e40884dcb2f0ef052b6731be3bf5fe6118c9d2c"
+    sha256 "5eb884416b9bb844a8e1491b74085474d35a95a6399b8a6c7e3170ee4e904f14"
   elsif OS.mac? && Hardware::CPU.intel?
     url "https://github.com/benbenbang/prjconf-cli/releases/download/#{version}/pcg-darwin-amd64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "6cef9c4e1a1527a7282c458ccf4242369eb39db6d183ad74e95c58efb52315f8"
+    sha256 "c84cac82bc510f349cb1e57c094230b4e017dcb9bdabb6237b80f38a79a7852d"
   elsif OS.linux? && Hardware::CPU.arm?
     url "https://github.com/benbenbang/prjconf-cli/releases/download/#{version}/pcg-linux-arm64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "bcb532733308755cb84d9c165af3cd749969be960caeb0f0bdfb2ca3d9bea552"
+    sha256 "f0cde34e44e539d66e3bee9450bec070630cc051363d351dec5b51463630d618"
   elsif OS.linux? && Hardware::CPU.intel?
     url "https://github.com/benbenbang/prjconf-cli/releases/download/#{version}/pcg-linux-amd64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "ede1adb9da6c01d0678eaf5a1444cbbf19292d3a52636d8be8fea247ef6405f9"
+    sha256 "db10fb321ebedcf131bd1a282d9db284c1a93280e455179f5954d6af848bf8a7"
   end
 
   def install
