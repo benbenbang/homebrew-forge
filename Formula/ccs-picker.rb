@@ -6,8 +6,8 @@ class CcsPicker < Formula
   desc "Fast, interactive terminal UI for browsing and resuming Claude sessions"
   homepage "https://github.com/benbenbang/ccs-picker"
   url "https://github.com/benbenbang/ccs-picker.git",
-      tag:      "1.0.0",
-      revision: "cb738c41cf3ed9abcc3d7a113b20980be1e711a3"
+      tag:      "1.1.0",
+      revision: "205c4a7c39ec7a4f79bdb27e0445f246a7012e55"
   license "MIT"
   head "https://github.com/benbenbang/ccs-picker.git", branch: "main"
 
