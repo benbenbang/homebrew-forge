@@ -12,8 +12,6 @@ class CcsPicker < Formula
       using: GitHubPrivateRepositoryReleaseDownloadStrategy
   sha256 "PLACEHOLDER_SHA256"
   license "MIT"
-  head "https://github.com/benbenbang/ccs-picker.git", branch: "main",
-       using: GitHubPrivateRepositoryDownloadStrategy
 
   depends_on "rust" => :build
 
