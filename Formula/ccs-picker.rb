@@ -1,17 +1,15 @@
 # typed: strict
 # frozen_string_literal: true
 
-# Include the custom download strategy
-require_relative "../scripts/github_prv_repo_download_strategy"
-
 # Formula for ccs-picker - Claude Session Picker
 class CcsPicker < Formula
   desc "Fast, interactive terminal UI for browsing and resuming Claude sessions"
   homepage "https://github.com/benbenbang/ccs-picker"
-  url "https://github.com/benbenbang/ccs-picker/archive/refs/tags/v1.0.0.tar.gz",
-      using: GitHubPrivateRepositoryReleaseDownloadStrategy
-  sha256 "PLACEHOLDER_SHA256"
+  url "https://github.com/benbenbang/ccs-picker.git",
+      tag:      "1.0.0",
+      revision: "cb738c41cf3ed9abcc3d7a113b20980be1e711a3"
   license "MIT"
+  head "https://github.com/benbenbang/ccs-picker.git", branch: "main"
 
   depends_on "rust" => :build
 
