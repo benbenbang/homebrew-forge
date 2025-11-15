@@ -50,7 +50,7 @@ pattern = "^[a-z0-9-]+$"
 # Map file paths to scopes for automatic scope detection
 [commit.scope.mappings]
 "Formula" = "formula"
-"github" = "workflows"
+".github" = "workflows"
 "core/services" = "services"
 
 [llm]
