@@ -1,0 +1,90 @@
+# Consilium Configuration
+# https://github.com/benbenbang/consilium
+
+# Commit Message Configuration (Optional)
+# If this section is present, it defines commit message validation rules
+# If omitted, flexible AI mode is used
+[commit]
+require_scope = true
+require_body = false
+max_subject_length = 72
+
+# Define allowed commit types (optional)
+#
+# Priority order for type detection:
+# 1. .pre-commit-config.yaml (auto-detected if present)
+# 2. Types defined in this [commit] section (overrides detection)
+# 3. Flexible mode (no types enforced if neither exists)
+#
+# Only define types here if you want to:
+# - Use custom types not in conventional commits
+# - Override types from .pre-commit-config.yaml
+# - Define types without using .pre-commit-config.yaml
+[[commit.types]]
+name = "feat"
+description = "Introduces a new feature or capability to users"
+enabled = true
+
+[[commit.types]]
+name = "fix"
+description = "Resolves a bug or defect in existing functionality"
+enabled = true
+
+[[commit.types]]
+name = "docs"
+description = "Updates or adds documentation without code changes"
+enabled = true
+
+# Add more types as needed (refactor, test, chore, perf, ci, build, etc.)
+
+# Scope validation (optional)
+[commit.scope]
+mode = "regex"  # Options: none, regex, allowed-list
+pattern = "^[a-z0-9-]+$"
+
+# Example for allowed-list mode:
+# mode = "allowed-list"
+# allowed = ["api", "cli", "config", "core"]
+
+# Monorepo path mappings (optional)
+# Map file paths to scopes for automatic scope detection
+[commit.scope.mappings]
+"Formula" = "formula"
+"github" = "workflows"
+"core/services" = "services"
+
+[llm]
+# Provider: anthropic, openai, ollama, or grok
+provider = "anthropic"
+
+# API Key: Use environment variable expansion to avoid committing secrets
+# Examples: $ANTHROPIC_API_KEY, ${OPENAI_API_KEY}
+api_key = "$ANTHROPIC_API_KEY_CLI_TOKEN"
+
+# Model: Optional, uses provider default if not specified
+# Anthropic: claude-sonnet-4-5-20250929, claude-opus-4-1-20250805, claude-haiku-4-5-20251001
+# OpenAI: gpt-5, gpt-5-mini, gpt-5-nano, gpt-4o, gpt-4-turbo
+# Ollama: llama3.3, llama3.1, llama3, mistral, codellama
+# Grok: grok-4-fast-reasoning, grok-4-fast-non-reasoning, grok-code-fast-1
+model = "claude-sonnet-4-5-20250929"
+
+# Temperature: Optional, 0.0-2.0 (default: 0.7)
+# Lower = more focused, Higher = more creative
+temperature = 0.7
+
+# Max Tokens: Optional, defaults to 1024
+max_tokens = 1024
+
+# Custom Prompt Preferences: Optional additional instructions for the LLM
+prompt_preferences = """
+Use this format:
+<summary>
+
+- List specific changes made
+- Each change as a separate bullet point
+
+---
+
+Provide additional context or explanation if needed.
+Example: This change improves performance by optimizing the database query.
+"""
