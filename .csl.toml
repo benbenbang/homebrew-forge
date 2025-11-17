@@ -8,34 +8,8 @@
 require_scope = true
 require_body = false
 max_subject_length = 72
+show_header = false
 
-# Define allowed commit types (optional)
-#
-# Priority order for type detection:
-# 1. .pre-commit-config.yaml (auto-detected if present)
-# 2. Types defined in this [commit] section (overrides detection)
-# 3. Flexible mode (no types enforced if neither exists)
-#
-# Only define types here if you want to:
-# - Use custom types not in conventional commits
-# - Override types from .pre-commit-config.yaml
-# - Define types without using .pre-commit-config.yaml
-[[commit.types]]
-name = "feat"
-description = "Introduces a new feature or capability to users"
-enabled = true
-
-[[commit.types]]
-name = "fix"
-description = "Resolves a bug or defect in existing functionality"
-enabled = true
-
-[[commit.types]]
-name = "docs"
-description = "Updates or adds documentation without code changes"
-enabled = true
-
-# Add more types as needed (refactor, test, chore, perf, ci, build, etc.)
 
 # Scope validation (optional)
 [commit.scope]
