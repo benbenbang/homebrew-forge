@@ -13,11 +13,11 @@ Examples:
 ```ruby
 # Specify both file and version
 gh release view --repo owner/repo --json "assets" --jq ".assets" | \
-  ruby ./package.rb --file Forumla/csl.rb --version 1.3.0
+  ruby ./package.rb --file Formula/csl.rb --version 1.3.0
 
 # Short flags
 gh release view --repo owner/repo --json "assets" --jq ".assets" | \
-  ruby ./package.rb -f Forumla/csl.rb -v 1.3.0
+  ruby ./package.rb -f Formula/csl.rb -v 1.3.0
 
 # Auto-detect file, just update version
 gh release view --repo owner/repo --json "assets" --jq ".assets" | \
@@ -25,7 +25,7 @@ gh release view --repo owner/repo --json "assets" --jq ".assets" | \
 
 # Just update digests, don't touch version
 gh release view --repo owner/repo --json "assets" --jq ".assets" | \
-  ruby ./package.rb -f Forumla/csl.rb
+  ruby ./package.rb -f Formula/csl.rb
 
 # Show help
 ruby ./package.rb --help
