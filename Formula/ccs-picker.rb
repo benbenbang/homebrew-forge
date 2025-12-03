@@ -7,7 +7,7 @@ class CcsPicker < Formula
   homepage "https://github.com/benbenbang/ccs-picker"
   url "https://github.com/benbenbang/ccs-picker.git",
       tag:      "1.2.0",
-      revision: "1.2.0"
+      revision: "937b0dd86a37f7dcdbde2f5732af557abe0d7898"
   license "MIT"
   head "https://github.com/benbenbang/ccs-picker.git", branch: "main"
 
