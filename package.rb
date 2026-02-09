@@ -122,19 +122,41 @@ end
 def fetch_release_assets(repo, version)
   puts "📦 Fetching release assets from #{repo}..."
 
-  tag = version ? "v#{version}" : ""
-  cmd = if tag.empty?
-          "gh release view --repo #{repo} --json assets --jq '.assets'"
-        else
-          "gh release view #{tag} --repo #{repo} --json assets --jq '.assets'"
-        end
+  output = nil
+  tag_found = nil
 
-  output = `#{cmd} 2>&1`
+  if version
+    # Try with 'v' prefix first, then without
+    tags_to_try = ["v#{version}", version]
 
-  unless $?.success?
-    puts "Error: Failed to fetch release from GitHub"
-    puts output
-    exit 1
+    tags_to_try.each do |tag|
+      cmd = "gh release view #{tag} --repo #{repo} --json assets --jq '.assets' 2>&1"
+      output = `#{cmd}`
+
+      if $?.success?
+        tag_found = tag
+        puts "✓ Found release: #{tag}"
+        break
+      end
+    end
+
+    unless tag_found
+      puts "Error: Could not find release 'v#{version}' or '#{version}' in repository"
+      puts "Available releases:"
+      system("gh release list --repo #{repo} --limit 5")
+      exit 1
+    end
+  else
+    # No version specified, get latest release
+    cmd = "gh release view --repo #{repo} --json assets --jq '.assets' 2>&1"
+    output = `#{cmd}`
+
+    unless $?.success?
+      puts "Error: Failed to fetch latest release from GitHub"
+      puts output
+      exit 1
+    end
+    tag_found = "latest"
   end
 
   begin
