@@ -14,7 +14,7 @@ class UvShell < Formula
   depends_on "rust" => :build
 
   def install
-    system "cargo", "install", "--locked", "--root", prefix, "--path", "uv-shell"
+    system "cargo", "install", "--root", prefix, "--path", "."
   end
 
   def caveats
