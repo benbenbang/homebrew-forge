@@ -7,7 +7,7 @@ class UvShell < Formula
   homepage "https://github.com/benbenbang/uv-shell"
   url "https://github.com/benbenbang/uv-shell.git",
       tag:      "2.0.0",
-      revision: "d4ebe7d32f9dffe8a2cd5eb2fa789a44d98222a3"
+      revision: "534df113f0c3f56f50d45a8c683100a7ce7f0dad"
   license "MIT"
   head "https://github.com/benbenbang/uv-shell.git", branch: "main"
 
