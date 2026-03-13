@@ -1,11 +1,19 @@
 # homebrew-forge
 
-## Installation
+A collection of Homebrew formulae by [@benbenbang](https://github.com/benbenbang).
+
+## Tap
 
 ```bash
 brew tap benbenbang/forge
-brew install benbenbang/forge/tomlv
 ```
+
+## Formulae
+
+| Formula | Description | Install |
+|---|---|---|
+| `uv-shell` | Create and activate Python virtual environments with uv | `brew install benbenbang/forge/uv-shell` |
+| `tomlv` | TOML version manager | `brew install benbenbang/forge/tomlv` |
 ## To update the formula
 utilize the `package.rb`
 
