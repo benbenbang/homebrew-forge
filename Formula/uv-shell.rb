@@ -6,8 +6,8 @@ class UvShell < Formula
   desc "Create and activate Python virtual environments with uv"
   homepage "https://github.com/benbenbang/uv-shell"
   url "https://github.com/benbenbang/uv-shell.git",
-      tag:      "2.1.0",
-      revision: "f6e3307c24564b1e1aa2913e280fcae15c8d49c3"
+      tag:      "2.3.0",
+      revision: "d91b44617a29589244a0456981d93f90a277049e"
   license "MIT"
   head "https://github.com/benbenbang/uv-shell.git", branch: "main"
 
@@ -45,22 +45,26 @@ class UvShell < Formula
         uv-shell --help       # Show all available options
 
       --- uv plugin wrapper ---
-      To enable `uv shell` and plugin-aware completions, prepend the wrapper to PATH:
+      To enable `uv shell` and plugin-aware completions:
 
-        export PATH="#{opt_libexec}/bin:$PATH"
-        export UV_REAL_PATH="$(which uv)"  # optional: skip PATH scan on every uv call
+      1. Add to your shell rc (~/.zshrc or ~/.bashrc):
+           export PATH="#{opt_libexec}/bin:$PATH"
 
-      Then reload completions (once, or add to shell rc):
+      2. Install completions once:
+           # zsh — auto-loaded every session, plugins discovered dynamically
+           uv generate-shell-completion zsh > "${fpath[1]}/_uv"
 
-        # zsh
-        unfunction _uv _uv_commands 2>/dev/null
-        eval "$(uv generate-shell-completion zsh)"
+           # nushell — add to config.nu: use ~/.config/nushell/completions/uv.nu
+           uv generate-shell-completion nushell | save ~/.config/nushell/completions/uv.nu
 
-        # bash
-        eval "$(uv generate-shell-completion bash)"
+           # bash
+           echo 'eval "$(uv generate-shell-completion bash)"' >> ~/.bashrc
 
-        # fish
-        uv generate-shell-completion fish | source
+           # fish
+           uv generate-shell-completion fish > ~/.config/fish/completions/uv.fish
+
+      zsh: new plugins are discovered dynamically at tab-press time — no reload needed.
+      nushell/bash/fish: re-run the above command after installing new plugins.
     EOS
   end
 
