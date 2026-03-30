@@ -6,8 +6,8 @@ class UvShell < Formula
   desc "Create and activate Python virtual environments with uv"
   homepage "https://github.com/benbenbang/uv-shell"
   url "https://github.com/benbenbang/uv-shell.git",
-      tag:      "2.6.0",
-      revision: "dbd3b6b6e60dcab088fb1c3b2269921fa50edb05"
+      tag:      "2.6.1",
+      revision: "68d5cd3fc0d7ab2d93535546a284d7bd2bdcc054"
   license "MIT"
   head "https://github.com/benbenbang/uv-shell.git", branch: "main"
 
