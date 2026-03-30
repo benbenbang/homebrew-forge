@@ -8,26 +8,26 @@ require_relative "../scripts/github_prv_repo_download_strategy"
 class Pcg < Formula
   desc "Project configuration generator for development workflows"
   homepage "https://github.com/benbenbang/prjconf-cli"
-  version "1.6.0"
+  version "1.7.0"
   license "Proprietary"
 
   # Platform-specific URLs using the custom download strategy
   if OS.mac? && Hardware::CPU.arm?
     url "https://github.com/benbenbang/prjconf-cli/releases/download/#{version}/pcg-darwin-arm64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "c2bfd4f47d44f13267a45e398add3520cd6cffe65482bda9fa04482cc8bd2789"
+    sha256 "31a12839bfb3a3fffe876500cfb3a6342031cd3cba92745da232ef113deaea70"
   elsif OS.mac? && Hardware::CPU.intel?
     url "https://github.com/benbenbang/prjconf-cli/releases/download/#{version}/pcg-darwin-amd64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "652931fb9533d3480c581e3dc2239fecdfe86603d0904f14f58886e6d3cb58d9"
+    sha256 "d31fa95bcb1d37c1c41bb8351164617cfd372533d5cd41e7765919d428dd4cd9"
   elsif OS.linux? && Hardware::CPU.arm?
     url "https://github.com/benbenbang/prjconf-cli/releases/download/#{version}/pcg-linux-arm64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "9999f8f5fa1bbaaa826b173d2aaaa5166d0571646c235e963bc51b0845d3fee2"
+    sha256 "dc158fb39da0b9ae2e6ba49c1bd93ebc3764156b17f6fb8b0b2b768dd03f6669"
   elsif OS.linux? && Hardware::CPU.intel?
     url "https://github.com/benbenbang/prjconf-cli/releases/download/#{version}/pcg-linux-amd64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "ef65dba18b78cd64b0ba89c7ea21badf2c38116096d62dd50a568896a9d528a9"
+    sha256 "14dfbb8972b650d18061e3f01431420c2908c5f615427a6446110c06aa20832d"
   end
 
   def install

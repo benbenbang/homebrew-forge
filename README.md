@@ -23,6 +23,11 @@ Examples:
 gh release view --repo owner/repo --json "assets" --jq ".assets" | \
   ruby ./package.rb --file Formula/csl.rb --version 1.3.0
 
+# or
+
+gh release view --repo owner/repo --json "assets" --jq ".assets" | \
+  ruby ./package.rb --file Formula/pcg.rb --version 1.7.0 --assets benbenbang/prjconf-cli
+
 # Short flags
 gh release view --repo owner/repo --json "assets" --jq ".assets" | \
   ruby ./package.rb -f Formula/csl.rb -v 1.3.0
