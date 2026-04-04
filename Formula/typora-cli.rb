@@ -14,9 +14,8 @@ class TyporaCli < Formula
   depends_on "rust" => :build
 
   def install
-    # Main typora-cli binary
     system "cargo", "install", "--locked", "--root", prefix, "--path", "."
-
+    bin.install "bin/typora-cli" => "tyc"
   end
 
   def caveats
@@ -39,11 +38,11 @@ class TyporaCli < Formula
 
   test do
     # Sentinel: opening "." should exit 0 without launching Typora
-    system bin/"typora-cli", "--dry-run", "."
+    system bin/"tyc", "--dry-run", "."
 
     # File creation: a new file should appear on disk
     test_file = testpath/"test-note.md"
-    system bin/"typora-cli", "--dry-run", test_file.to_s
+    system bin/"tyc", "--dry-run", test_file.to_s
     assert_predicate test_file, :exist?
   end
 end
