@@ -15,7 +15,7 @@ class TyporaCli < Formula
 
   def install
     system "cargo", "install", "--locked", "--root", prefix, "--path", "."
-    bin.install "bin/typora-cli" => "tyc"
+    mv bin/"typora-cli", bin/"tyc"
   end
 
   def caveats
