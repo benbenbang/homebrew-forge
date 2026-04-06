@@ -30,7 +30,7 @@ gh release view --repo owner/repo --json "assets" --jq ".assets" | \
 
 # Short flags
 gh release view --repo owner/repo --json "assets" --jq ".assets" | \
-  ruby ./package.rb -f Formula/csl.rb -v 1.3.0
+  ruby ./package.rb -f Formula/csl.rb -v 1.3.0 --assets benbenbang/consilium
 
 # Auto-detect file, just update version
 gh release view --repo owner/repo --json "assets" --jq ".assets" | \
