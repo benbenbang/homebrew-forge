@@ -10,22 +10,15 @@ brew install benbenbang/forge/tomlv
 utilize the `package.rb`
 
 Examples:
-```ruby
-# Specify both file and version
-gh release view --assets owner/repo --json "assets" --jq ".assets" | \
-  ./package.rb --file Formula/csl.rb --version 1.3.0
+```bash
+# Update version + SHA256s (binary release)
+./package.rb --assets benbenbang/consilium -f Formula/csl.rb -v 1.3.0
 
-# Short flags
-gh release view --assets owner/repo --json "assets" --jq ".assets" | \
-  ./package.rb -f Formula/csl.rb -v 1.3.0
+# Update SHA256s only, no version bump
+./package.rb --assets benbenbang/consilium -f Formula/csl.rb
 
-# Auto-detect file, just update version
-gh release view --assets owner/repo --json "assets" --jq ".assets" | \
-  ./package.rb -v 1.3.0
-
-# Just update digests, don't touch version
-gh release view --assets owner/repo --json "assets" --jq ".assets" | \
-  ./package.rb -f Formula/csl.rb
+# Update git revision for source build
+./package.rb --revision benbenbang/uv-shell -f Formula/uv-shell.rb -v 2.0.0
 
 # Show help
 ./package.rb --help
