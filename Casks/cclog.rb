@@ -5,8 +5,8 @@
 require_relative "../scripts/github_prv_repo_download_strategy"
 
 cask "cclog" do
-  version "1.0.0"
-  sha256 "4dd550b3af28975d5598a3ce6fd6c2f64d0bb92e1cdd69cdaa74ebc7ce81cb68"
+  version "1.1.0"
+  sha256 "867ac41c958367dc25805794a31eb7e9513c4420222159d20d3896d4c109e1f0"
 
   url "https://github.com/benbenbang/cclog/releases/download/#{version}/CCLog_#{version}_universal.dmg",
       using: GitHubPrivateRepositoryReleaseDownloadStrategy
