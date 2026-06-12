@@ -18,6 +18,8 @@ cask "cclog" do
 
   app "CCLog.app"
 
+  uninstall quit: "dev.bitbrew.cclog"
+
   zap trash: [
     "~/Library/Application Support/dev.bitbrew.cclog",
     "~/Library/Caches/dev.bitbrew.cclog",
