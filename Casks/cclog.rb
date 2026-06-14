@@ -1,8 +1,20 @@
 # typed: strict
 # frozen_string_literal: true
 
-# Include the custom download strategy for private GitHub release assets
-require_relative "../scripts/github_prv_repo_download_strategy"
+# Include the custom download strategy for private GitHub release assets.
+# On `brew upgrade`, Homebrew copies this cask file alone into the Caskroom
+# receipt (without the sibling scripts/ dir) and loads it to run the old
+# version's uninstall — so require_relative fails there with a LoadError.
+# Fall back to a stub so the receipt still loads: uninstall never downloads,
+# it only quits and removes the app.
+begin
+  require_relative "../scripts/github_prv_repo_download_strategy"
+rescue LoadError
+  require "download_strategy"
+  unless defined?(GitHubPrivateRepositoryReleaseDownloadStrategy)
+    GitHubPrivateRepositoryReleaseDownloadStrategy = Class.new(CurlDownloadStrategy)
+  end
+end
 
 cask "cclog" do
   version "1.4.0"
