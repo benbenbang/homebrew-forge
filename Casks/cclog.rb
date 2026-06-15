@@ -17,8 +17,8 @@ rescue LoadError
 end
 
 cask "cclog" do
-  version "1.4.0"
-  sha256 "e4c2c8d38e200e293d4abf077fdda80438fd177c219ad8898813c18d39e1a470"
+  version "1.5.0"
+  sha256 "75c5817159f2559996122bbb37eb16ccccdcc5b2e478ab9499e23173f229e942"
 
   url "https://github.com/benbenbang/cclog/releases/download/#{version}/CCLog_#{version}_universal.dmg",
       using: GitHubPrivateRepositoryReleaseDownloadStrategy
