@@ -8,26 +8,26 @@ require_relative "../scripts/github_prv_repo_download_strategy"
 class Csl < Formula
   desc "Consilium CLI for development workflows"
   homepage "https://github.com/benbenbang/consilium"
-  version "1.12.0"
+  version "1.13.0"
   license "Proprietary"
 
   # Platform-specific URLs using the custom download strategy
   if OS.mac? && Hardware::CPU.arm?
     url "https://github.com/benbenbang/consilium/releases/download/#{version}/csl-darwin-arm64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "694c84a825a22a96c5e0abb24053477eb50308b1a402e2f96ca55fb5365f5800"
+    sha256 "a07c6239aad3476b9639045a51653f7efcd8fdd1c349a3da8e6b7279a8e3c947"
   elsif OS.mac? && Hardware::CPU.intel?
     url "https://github.com/benbenbang/consilium/releases/download/#{version}/csl-darwin-amd64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "c3e28ac9110a369cc5836c702b25062b898eb09a08b27fee942c6bd54cf7440b"
+    sha256 "149815ab51e6f01ba2fdc29282fa3f7b551a2271c43c25241560c6cb920fbe02"
   elsif OS.linux? && Hardware::CPU.arm?
     url "https://github.com/benbenbang/consilium/releases/download/#{version}/csl-linux-arm64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "3df510c93b4e8680371b7728ff51657c7ce9fe237dde081fea5acb66fa5dd12b"
+    sha256 "896d1523f7427a880235133d17134f08380c26bf0bfa067ef988204f045ee6d1"
   elsif OS.linux? && Hardware::CPU.intel?
     url "https://github.com/benbenbang/consilium/releases/download/#{version}/csl-linux-amd64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "c9ac1b0cb0524f9cbac0bf448806eb7082d7c83c489272b2f8896948abdebda2"
+    sha256 "b298f4c98b9e8e4eedfe39e693afcc5c82986aad716da35fe18f45a019c96077"
   end
 
   def install
