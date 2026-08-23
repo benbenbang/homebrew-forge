@@ -7,15 +7,14 @@
 # project's OLD name in homebrew/cask and now redirects to the `vibe-notch` cask,
 # so a bare `brew install claude-island` would install Vibe Notch instead.
 #
-# TODO after cutting the Sparkle-disabled release:
-#   - bump `version` + `sha256` to that release
-#   - note: release 1.4.1 is a PRE-FIX build (bundle id com.celestial.ClaudeIsland,
-#     Sparkle feed still points at the upstream VibeNotch appcast, so it will
-#     self-update to Vibe Notch). The uninstall/zap ids below already target the
-#     fixed build's id (dev.bitbrew.claudeisland).
+# 1.5.0: Sparkle is disabled (empty SUFeedURL, auto-checks off), so it no longer
+# self-updates to Vibe Notch. NOTE: the bundle id in this build is still
+# com.celestial.ClaudeIsland (the dev.bitbrew.claudeisland rename has NOT shipped
+# yet), so the uninstall/zap ids below must match com.celestial. Update them to
+# dev.bitbrew.claudeisland only once a release actually carries that id.
 cask "claudeisland" do
   version "1.5.0"
-  sha256 "5ac783373cc43274d8fd0457a9cd57ea98040946"
+  sha256 "74ccd5288786155687a4840c6bb39813a775a89b9a433f54f4afb39c5de27a4a"
 
   url "https://github.com/benbenbang/claude-island/releases/download/#{version}/ClaudeIsland-#{version}.dmg"
   name "Claude Island"
