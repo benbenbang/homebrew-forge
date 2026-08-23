@@ -14,8 +14,8 @@
 #     self-update to Vibe Notch). The uninstall/zap ids below already target the
 #     fixed build's id (dev.bitbrew.claudeisland).
 cask "claudeisland" do
-  version "1.4.1"
-  sha256 "714029ed06900f4d4f05e792317925e73aba20b47732b883dc7b804366153ca7"
+  version "1.5.0"
+  sha256 "5ac783373cc43274d8fd0457a9cd57ea98040946"
 
   url "https://github.com/benbenbang/claude-island/releases/download/#{version}/ClaudeIsland-#{version}.dmg"
   name "Claude Island"
