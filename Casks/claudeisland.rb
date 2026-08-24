@@ -25,8 +25,10 @@ cask "claudeisland" do
 
   app "Claude Island.app"
 
-  uninstall quit: "dev.bitbrew.claudeisland"
-  uninstall quit: "com.celestial.ClaudeIsland"
+  uninstall quit: [
+    "com.celestial.ClaudeIsland",
+    "dev.bitbrew.claudeisland",
+  ]
 
   zap trash: [
     "~/Library/Application Support/dev.bitbrew.claudeisland",
