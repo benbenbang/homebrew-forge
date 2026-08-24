@@ -13,8 +13,8 @@
 # yet), so the uninstall/zap ids below must match com.celestial. Update them to
 # dev.bitbrew.claudeisland only once a release actually carries that id.
 cask "claudeisland" do
-  version "1.5.0"
-  sha256 "74ccd5288786155687a4840c6bb39813a775a89b9a433f54f4afb39c5de27a4a"
+  version "1.5.1"
+  sha256 "5f48aaf8b10b9c10193162320e1b5a980eed80ceeca92a57bd384a2892e38914"
 
   url "https://github.com/benbenbang/claude-island/releases/download/#{version}/ClaudeIsland-#{version}.dmg"
   name "Claude Island"
@@ -26,11 +26,16 @@ cask "claudeisland" do
   app "Claude Island.app"
 
   uninstall quit: "dev.bitbrew.claudeisland"
+  uninstall quit: "com.celestial.ClaudeIsland"
 
   zap trash: [
     "~/Library/Application Support/dev.bitbrew.claudeisland",
     "~/Library/Caches/dev.bitbrew.claudeisland",
     "~/Library/Preferences/dev.bitbrew.claudeisland.plist",
     "~/Library/Saved Application State/dev.bitbrew.claudeisland.savedState",
+    "~/Library/Application Support/com.celestial.ClaudeIsland",
+    "~/Library/Caches/com.celestial.ClaudeIsland",
+    "~/Library/Preferences/com.celestial.ClaudeIsland.plist",
+    "~/Library/Saved Application State/com.celestial.ClaudeIsland.savedState",
   ]
 end
