@@ -26,7 +26,7 @@ cask "cclog" do
   desc "Native app for reading Claude Code session logs"
   homepage "https://github.com/benbenbang/cclog"
 
-  depends_on macos: :catalina
+  depends_on macos: :big_sur
 
   app "CCLog.app"
 
