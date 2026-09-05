@@ -224,15 +224,29 @@ end
 def update_assets(formula_content, digest_map, formula_path)
   updates = []
 
-  digest_map.each do |binary_name, new_digest|
-    # Match the url line containing this binary name, followed by optional lines,
-    # then the sha256 line
-    pattern = /(url\s+"[^"]*#{Regexp.escape(binary_name)}"[^\n]*\n(?:.*?\n)*?\s*sha256\s+)"([a-f0-9]{64})"/m
+  # Formulas may interpolate the version into asset urls (e.g.
+  # "cj-rs-#{version}-aarch64-apple-darwin.tar.gz"). Release asset names carry
+  # the literal version, so also try a templated name where the literal version
+  # is swapped back to the "#{version}" placeholder.
+  formula_version = formula_content[/^\s*version\s+"([^"]+)"/, 1]
 
-    if formula_content.match?(pattern)
+  digest_map.each do |binary_name, new_digest|
+    names_to_try = [binary_name]
+    if formula_version && !formula_version.empty? && binary_name.include?(formula_version)
+      names_to_try << binary_name.gsub(formula_version, '#{version}')
+    end
+
+    names_to_try.each do |name|
+      # Match the url line containing this binary name, followed by optional
+      # lines, then the sha256 line
+      pattern = /(url\s+"[^"]*#{Regexp.escape(name)}"[^\n]*\n(?:.*?\n)*?\s*sha256\s+)"([a-f0-9]{64})"/m
+
+      next unless formula_content.match?(pattern)
+
       old_digest = formula_content[pattern, 2]
       formula_content.gsub!(pattern, "\\1\"#{new_digest}\"")
       updates << { name: binary_name, old: old_digest, new: new_digest }
+      break
     end
   end
 
@@ -264,8 +278,9 @@ def update_revision(formula_content, new_sha, formula_path)
   pattern = /(revision:\s*)"([^"]*)"/
 
   unless formula_content.match?(pattern)
-    puts "Error: Could not find revision line in formula"
-    puts "Formula might not be a source-build formula"
+    puts "Error: This formula has no 'revision:' line."
+    puts "--revision is only for source-build formulas that clone via git tag + revision."
+    puts "For binary-release formulas (per-platform url + sha256), use --assets instead."
     exit 1
   end
 
