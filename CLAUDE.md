@@ -8,7 +8,7 @@ A Homebrew tap (`brew tap benbenbang/forge`) hosting formulas for various CLI to
 
 ## Updating a formula
 
-The primary workflow is `package.rb` — a Ruby script that fetches release asset checksums from GitHub and patches the formula file in-place.
+The primary workflow is `package.rb` - a Ruby script that fetches release asset checksums from GitHub and patches the formula file in-place.
 
 ### Binary release (pre-built binaries)
 
@@ -27,11 +27,11 @@ The primary workflow is `package.rb` — a Ruby script that fetches release asse
 ./package.rb --revision benbenbang/uv-shell -f Formula/uv-shell.rb -v 2.0.0
 ```
 
-`package.rb` calls the `gh` CLI under the hood — a working `gh auth login` is required.
+`package.rb` calls the `gh` CLI under the hood - a working `gh auth login` is required.
 
 ## Updating a cask
 
-Casks (macOS apps shipped as `.dmg`/`.pkg`/`.zip`) use `cask.rb` instead of `package.rb` — see [docs/cask_usage.md](docs/cask_usage.md). It reads the release asset's sha256 from GitHub and patches the cask in place.
+Casks (macOS apps shipped as `.dmg`/`.pkg`/`.zip`) use `cask.rb` instead of `package.rb` - see [docs/cask_usage.md](docs/cask_usage.md). It reads the release asset's sha256 from GitHub and patches the cask in place.
 
 ```bash
 # Update version + sha256
@@ -47,11 +47,11 @@ A separate script is warranted because casks differ from formulae: `sha256` prec
 
 Two patterns are used across formulas:
 
-**Inline platform conditionals** (`Formula/csl.rb`, `Formula/pcg.rb`) — the `if OS.mac? && Hardware::CPU.arm?` chain appears directly in the formula body, with each branch providing its own `url` and `sha256`. Private repos use `GitHubPrivateRepositoryReleaseDownloadStrategy` (from `scripts/github_prv_repo_download_strategy.rb`), which reads the GitHub token from `HOMEBREW_GITHUB_API_TOKEN` or `GITHUB_TOKEN`.
+**Inline platform conditionals** (`Formula/csl.rb`, `Formula/pcg.rb`) - the `if OS.mac? && Hardware::CPU.arm?` chain appears directly in the formula body, with each branch providing its own `url` and `sha256`. Private repos use `GitHubPrivateRepositoryReleaseDownloadStrategy` (from `scripts/github_prv_repo_download_strategy.rb`), which reads the GitHub token from `HOMEBREW_GITHUB_API_TOKEN` or `GITHUB_TOKEN`.
 
-**Source builds** (`Formula/uv-shell.rb`) — clone from a git tag + revision, build with `cargo`/`go`/etc., then install.
+**Source builds** (`Formula/uv-shell.rb`) - clone from a git tag + revision, build with `cargo`/`go`/etc., then install.
 
-**`FormulaHelper` abstraction** (`scripts/formula_helper.rb`) — `BinaryConfig` / `SourceConfig` classes + `setup_binary` / `setup_source` class methods. Used in `examples/` and available for new formulas; reduces repetition when adding multi-platform binaries.
+**`FormulaHelper` abstraction** (`scripts/formula_helper.rb`) - `BinaryConfig` / `SourceConfig` classes + `setup_binary` / `setup_source` class methods. Used in `examples/` and available for new formulas; reduces repetition when adding multi-platform binaries.
 
 ## Cask architecture
 
@@ -67,7 +67,7 @@ ruby scripts/generate_formula.rb binary owner/repo 1.0.0 binary-name [--private]
 ruby scripts/generate_formula.rb source owner/repo 1.0.0 [--go|--rust|--npm] [--revision SHA]
 ```
 
-Output is printed to stdout — redirect to `Formula/<name>.rb`.
+Output is printed to stdout - redirect to `Formula/<name>.rb`.
 
 ## Commit message format
 
@@ -83,4 +83,4 @@ Types: `build`, `ci`, `docs`, `feat`, `fix`, `perf`, `refactor`, `style`, `test`
 
 PRs against `main` run:
 - **pre-commit** hooks (yaml, trailing whitespace, JSON formatting, commit message validation)
-- **verify-change-sha**: fails if `Formula/*.rb` changed but no `sha256` line was modified — add the `skip-sha-check` label to bypass for non-checksum PRs. Scoped to `Formula/**/*.rb` only, so cask-only PRs (`Casks/**/*.rb`) don't trigger it.
+- **verify-change-sha**: fails if `Formula/*.rb` changed but no `sha256` line was modified - add the `skip-sha-check` label to bypass for non-checksum PRs. Scoped to `Formula/**/*.rb` only, so cask-only PRs (`Casks/**/*.rb`) don't trigger it.
