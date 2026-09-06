@@ -75,10 +75,22 @@ class GitHubPrivateRepositoryReleaseDownloadStrategy < CurlDownloadStrategy
   end
 
   def set_github_token
-    @github_token = ENV["HOMEBREW_GITHUB_API_TOKEN"] || ENV["GITHUB_TOKEN"]
+    # Prefer an owner-scoped token so personal and org/team repos can each use
+    # their own PAT (e.g. an org PAT with SSO authorized). Fall back to the
+    # generic token. Owner-scoped must win: a generic token that lacks access
+    # to this owner would otherwise be tried first and fail.
+    owner_var = "HOMEBREW_GITHUB_TEAM_#{env_key(@owner)}_API_TOKEN"
+    @github_token = ENV[owner_var] || ENV["HOMEBREW_GITHUB_API_TOKEN"] || ENV["GITHUB_TOKEN"]
 
     unless @github_token
-      raise CurlDownloadStrategyError, "Environment variable HOMEBREW_GITHUB_API_TOKEN is required."
+      raise CurlDownloadStrategyError,
+            "No GitHub token found for #{@owner}. Set #{owner_var}, " \
+            "HOMEBREW_GITHUB_API_TOKEN, or GITHUB_TOKEN."
     end
+  end
+
+  # Turn a repo owner into an env-var-safe fragment, e.g. "bitbrew-dev" => "BITBREW_DEV".
+  def env_key(owner)
+    owner.gsub(/[^A-Za-z0-9]/, "_").upcase
   end
 end

@@ -47,7 +47,7 @@ A separate script is warranted because casks differ from formulae: `sha256` prec
 
 Two patterns are used across formulas:
 
-**Inline platform conditionals** (`Formula/csl.rb`, `Formula/pcg.rb`) - the `if OS.mac? && Hardware::CPU.arm?` chain appears directly in the formula body, with each branch providing its own `url` and `sha256`. Private repos use `GitHubPrivateRepositoryReleaseDownloadStrategy` (from `scripts/github_prv_repo_download_strategy.rb`), which reads the GitHub token from `HOMEBREW_GITHUB_API_TOKEN` or `GITHUB_TOKEN`.
+**Inline platform conditionals** (`Formula/csl.rb`, `Formula/pcg.rb`) - the `if OS.mac? && Hardware::CPU.arm?` chain appears directly in the formula body, with each branch providing its own `url` and `sha256`. Private repos use `GitHubPrivateRepositoryReleaseDownloadStrategy` (from `scripts/github_prv_repo_download_strategy.rb`), which reads the GitHub token in this order: an owner-scoped `HOMEBREW_GITHUB_TEAM_<OWNER>_API_TOKEN` (owner upcased, non-alphanumerics to `_`, e.g. `benbenbang` to `BENBENBANG`), then `HOMEBREW_GITHUB_API_TOKEN`, then `GITHUB_TOKEN`. The owner-scoped var lets personal and org repos each use their own PAT.
 
 **Source builds** (`Formula/uv-shell.rb`) - clone from a git tag + revision, build with `cargo`/`go`/etc., then install.
 
@@ -55,7 +55,7 @@ Two patterns are used across formulas:
 
 ## Cask architecture
 
-Casks distribute pre-built macOS apps. They reuse the same `GitHubPrivateRepositoryReleaseDownloadStrategy` as private formulae via `using:` on the `url` (drop it for public repos). Conventions: `sha256` before `url`, `#{version}`-interpolated filename, `desc` must not contain the platform word, `depends_on macos:` uses the bare-symbol minimum (e.g. `:catalina`), and `zap trash:` lists app-managed files. Notarized apps install without quarantine workarounds. Template: [examples/cask_example.rb](examples/cask_example.rb). End users (and the maintainer) need `HOMEBREW_GITHUB_API_TOKEN`/`GITHUB_TOKEN` to install a private cask.
+Casks distribute pre-built macOS apps. They reuse the same `GitHubPrivateRepositoryReleaseDownloadStrategy` as private formulae via `using:` on the `url` (drop it for public repos). Conventions: `sha256` before `url`, `#{version}`-interpolated filename, `desc` must not contain the platform word, `depends_on macos:` uses the bare-symbol minimum (e.g. `:big_sur`; note `:catalina` and older are disabled upstream, and the oldest allowed is Big Sur), and `zap trash:` lists app-managed files. Notarized apps install without quarantine workarounds. Template: [examples/cask_example.rb](examples/cask_example.rb). End users (and the maintainer) need a GitHub token to install a private cask: an owner-scoped `HOMEBREW_GITHUB_TEAM_<OWNER>_API_TOKEN`, or `HOMEBREW_GITHUB_API_TOKEN`/`GITHUB_TOKEN`.
 
 ## Generating a new formula
 
