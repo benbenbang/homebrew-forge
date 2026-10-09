@@ -3,7 +3,7 @@
 
 # Formula for jevwise: A Go SDK for Jev, the decision model, including cli and MCP.
 class Jevwise < Formula
-  desc "Jev, the decision model, come with Cli and MCP "
+  desc "Jev decision model with CLI and MCP server"
   homepage "https://github.com/bitbrew-dev/jevwise"
   version "1.4.0"
   license "MIT"
@@ -21,24 +21,15 @@ class Jevwise < Formula
   elsif OS.linux? && Hardware::CPU.intel?
     url "https://github.com/bitbrew-dev/jevwise/releases/download/v#{version}/jevwise_v#{version}_linux_amd64"
     sha256 "e811b0513672bef4ba20c72ac16bacb804ba43d616dc54a67662ec28e50ab72f"
-  elsif OS.windows? && Hardware::CPU.arm?
-    url "https://github.com/bitbrew-dev/jevwise/releases/download/v#{version}/jevwise_v#{version}_windows_arm64.exe"
-    sha256 "d14aa8f090181e4704a50883bedf354be088e8006f0697c024db583acaf64eb8"
-  elsif OS.windows? && Hardware::CPU.intel?
-    url "https://github.com/bitbrew-dev/jevwise/releases/download/v#{version}/jevwise_v#{version}_windows_amd64.exe"
-    sha256 "2fc52b9a14ea08736a9a0668b3e7704d6a9bf6836bd8dd652f731638c40bffe1"
   end
 
   def install
-    bin.install "jevwise"
-    mv bin/"jev", bin/"jevwise"
     # The download is the binary itself, named after the release asset
     bin.install Dir["jevwise_v#{version}_*"].first => "jevwise"
   end
 
   test do
     # Test that the binary runs and shows help
-    assert_match "jev", shell_output("#{bin}/jevwise --help")
     assert_match "Make decisions with Jev", shell_output("#{bin}/jevwise --help")
   end
 end
