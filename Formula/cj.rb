@@ -8,26 +8,26 @@ require_relative "../scripts/github_prv_repo_download_strategy"
 class Cj < Formula
   desc "Shell companion for jumping between useful directories"
   homepage "https://github.com/bitbrew-dev/cj-rs"
-  version "1.0.0"
+  version "1.0.1"
   license "MIT"
   head "https://github.com/bitbrew-dev/cj-rs.git", branch: "main"
 
   if OS.mac? && Hardware::CPU.arm?
     url "https://github.com/bitbrew-dev/cj-rs/releases/download/#{version}/cj-rs-#{version}-aarch64-apple-darwin.tar.gz",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "70bd6904d2d290934779e78a1df09c57192aa1f73fbc1d8125abdc78f18710ca"
+    sha256 "c92b8553725b9576f9d931933f7a25798b6decce941b84100d6f0c2807244823"
   elsif OS.mac? && Hardware::CPU.intel?
     url "https://github.com/bitbrew-dev/cj-rs/releases/download/#{version}/cj-rs-#{version}-x86_64-apple-darwin.tar.gz",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "e372b00e7679cef5c6b3e25bb70acc2e3095174186092bd160667630e8dd6811"
+    sha256 "accfe98ec3be36937f2df50e81be3095ccfe98645a108017e9aa22d23ec3ea61"
   elsif OS.linux? && Hardware::CPU.arm?
     url "https://github.com/bitbrew-dev/cj-rs/releases/download/#{version}/cj-rs-#{version}-aarch64-unknown-linux-gnu.tar.gz",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "b328d55235dd6df54b362c6cc84f0202e275376b78cda63cdf5666b3c44f240e"
+    sha256 "b9c7440d704d4aeb4b1c8a0ffd19b76edeb6121ae8749fa6e9b1d676017fa9ff"
   elsif OS.linux? && Hardware::CPU.intel?
     url "https://github.com/bitbrew-dev/cj-rs/releases/download/#{version}/cj-rs-#{version}-x86_64-unknown-linux-gnu.tar.gz",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "51c2303da8861f16e4792a7dc3bb1bd2ed816c0eaa5045bd7ca5f193a8707733"
+    sha256 "709136cf4face1a9dc83508272bbb674268bf8c5c70950795054625305dd4523"
   end
 
   def install
