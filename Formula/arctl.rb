@@ -8,26 +8,26 @@ require_relative "../scripts/github_prv_repo_download_strategy"
 class Arctl < Formula
   desc "Arctl manage the complete lifecycle of the Airflow Helm deployment on a local k3d cluster"
   homepage "https://github.com/benbenbang/areo"
-  version "2.3.0"
+  version "2.4.0"
   license "Proprietary"
 
   # Platform-specific URLs using the custom download strategy
   if OS.mac? && Hardware::CPU.arm?
     url "https://github.com/benbenbang/areo/releases/download/#{version}/arctl-darwin-arm64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "e9c255ef3b065f9e142cbb5a6102044bb0fc9d03d754756c4864f89096af8855"
+    sha256 "ca4f229d9f54d98be1d55b1c71b424c76db0809b4a29b63e5158b7add89bfbc5"
   elsif OS.mac? && Hardware::CPU.intel?
     url "https://github.com/benbenbang/areo/releases/download/#{version}/arctl-darwin-amd64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "fa5fb999c815810a81c6e3d8817e394ce59f24376b0adda35ef2b4ee6d273084"
+    sha256 "a023854837335eb1f64bddb85f284d280fe7f8f3402c3e31151de551977d983c"
   elsif OS.linux? && Hardware::CPU.arm?
     url "https://github.com/benbenbang/areo/releases/download/#{version}/arctl-linux-arm64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "2d6979c56c892ca2095f6c97dcb2f74799bce8084eaadee4030b1f0cf5acae3a"
+    sha256 "cd4f4c65281a1f9a1159ad02540a6f9c7a8bf161c3f3acb349ce6c0bb92cda5b"
   elsif OS.linux? && Hardware::CPU.intel?
     url "https://github.com/benbenbang/areo/releases/download/#{version}/arctl-linux-amd64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "4636d74cc9b7d902e38ddf069f73882b4f8589b84969748511d1905049549179"
+    sha256 "a92ab164df6dfb30baf127337746a43c683dc0cf51db83acd8d33c1c70c4fb0e"
   end
 
   def install
