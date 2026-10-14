@@ -5,22 +5,22 @@
 class Jevwise < Formula
   desc "Jev decision model with CLI and MCP server"
   homepage "https://github.com/bitbrew-dev/jevwise"
-  version "1.6.0"
+  version "1.7.0"
   license "MIT"
 
   # Platform-specific URLs
   if OS.mac? && Hardware::CPU.arm?
     url "https://github.com/bitbrew-dev/jevwise/releases/download/v#{version}/jevwise_v#{version}_darwin_arm64"
-    sha256 "729dbd3f5ad4054052eb7b01b472bc887312c56f3d0d225d6533a2f8cd25500c"
+    sha256 "0eeb51a0ddd259534ff08f1b0150a5b4cbca0925a29f1cd97e438587839eab09"
   elsif OS.mac? && Hardware::CPU.intel?
     url "https://github.com/bitbrew-dev/jevwise/releases/download/v#{version}/jevwise_v#{version}_darwin_amd64"
-    sha256 "103ebec105398249b7a4180a6fd84eedbd19a61b9e3967c7bf505d87a99720e5"
+    sha256 "38c7cd3dd84b6be7eae9c43491f4fa9209b06638ef1ea42f4442fffcfee1c687"
   elsif OS.linux? && Hardware::CPU.arm?
     url "https://github.com/bitbrew-dev/jevwise/releases/download/v#{version}/jevwise_v#{version}_linux_arm64"
-    sha256 "8d29248dff00eaa9a21d6a87ad6acf76a645b38d57561cee598fab4f79b7d4d0"
+    sha256 "a8e0fde87ceb8771b08f1e567cbe9e3fb7856f436e364d07e32221645fd270cf"
   elsif OS.linux? && Hardware::CPU.intel?
     url "https://github.com/bitbrew-dev/jevwise/releases/download/v#{version}/jevwise_v#{version}_linux_amd64"
-    sha256 "6c6fe6371d9bc357a7b9c2e46c5fde99f2783538f2965d42d8ff9f8b5bccb9b1"
+    sha256 "b6a5aea6d663f6cfcc0d7b350721a0e1555dc45523e492325ad999f119d259be"
   end
 
   def install
