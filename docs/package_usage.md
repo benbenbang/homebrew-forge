@@ -30,7 +30,7 @@ ruby package.rb --revision benbenbang/uv-shell -f Formula/uv-shell.rb -v 2.0.0
 
 ### Mode 1: Update Binary SHA256s (`--assets`)
 
-For formulas that use pre-built binary releases (like `csl.rb`, `pcg.rb`):
+For formulas that use pre-built binary releases (like `csl.rb`, `rigup.rb`):
 
 ```bash
 # Full command
