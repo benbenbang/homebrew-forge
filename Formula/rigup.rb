@@ -4,30 +4,30 @@
 # Include the custom download strategy
 require_relative "../scripts/github_prv_repo_download_strategy"
 
-# Formula for pcg - Project configuration generator
-class Pcg < Formula
+# Formula for rig - Project configuration generator
+class Rig < Formula
   desc "Project configuration generator for development workflows"
-  homepage "https://github.com/benbenbang/prjconf-cli"
-  version "2.2.0"
+  homepage "https://github.com/benbenbang/rigup"
+  version "v3.0.0"
   license "Proprietary"
 
   # Platform-specific URLs using the custom download strategy
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/benbenbang/prjconf-cli/releases/download/#{version}/pcg-darwin-arm64",
+    url "https://github.com/benbenbang/rigup/releases/download/#{version}/rig-darwin-arm64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "86c80378f7d05d81582fe8adb35dcbf887247d84b19a1e8b4fb473385ab0951f"
+    sha256 "9f6d85a9ebb82ebc0ab34866226b6670b14dd09281638dd72c0a5ce5ec6419ce"
   elsif OS.mac? && Hardware::CPU.intel?
-    url "https://github.com/benbenbang/prjconf-cli/releases/download/#{version}/pcg-darwin-amd64",
+    url "https://github.com/benbenbang/rigup/releases/download/#{version}/rig-darwin-amd64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "64da16390e5a67cae6e481f5efcab4a0e16e829f96c0bb454c0b2b57c8d57589"
+    sha256 "ba6eaaa092b5f7790e549cde54f23742ff8264ed9ca0e00c8d45a416788a97f6"
   elsif OS.linux? && Hardware::CPU.arm?
-    url "https://github.com/benbenbang/prjconf-cli/releases/download/#{version}/pcg-linux-arm64",
+    url "https://github.com/benbenbang/rigup/releases/download/#{version}/rig-linux-arm64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "bf073de0bf7772a133a98dbd60d60708cd461a08ce2f83f74dc08c2a325f179f"
+    sha256 "b90a9ff85c872c8f93dba8a1398b7b513058dde41dcf4f59f43acc9dbb91988b"
   elsif OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/benbenbang/prjconf-cli/releases/download/#{version}/pcg-linux-amd64",
+    url "https://github.com/benbenbang/rigup/releases/download/#{version}/rig-linux-amd64",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
-    sha256 "a12e04a502e868e2a16268fdd4592bdd67b94f95780c7bcb2cb389f55a4ba253"
+    sha256 "80d2dd787919d26fe6bc4c09ab72a8a1713cbbc6dd9f19d366f55e9aa9bb647b"
   end
 
   def install
@@ -39,11 +39,11 @@ class Pcg < Formula
     chmod 0755, binary_path
 
     # Install the binary
-    bin.install binary_path => "pcg"
+    bin.install binary_path => "rig"
   end
 
   test do
     # Test that the binary runs and shows help
-    assert_match "pcg", shell_output("#{bin}/pcg --help")
+    assert_match "rig", shell_output("#{bin}/rig --help")
   end
 end
