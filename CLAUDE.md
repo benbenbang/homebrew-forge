@@ -47,7 +47,7 @@ A separate script is warranted because casks differ from formulae: `sha256` prec
 
 Two patterns are used across formulas:
 
-**Inline platform conditionals** (`Formula/csl.rb`, `Formula/pcg.rb`) - the `if OS.mac? && Hardware::CPU.arm?` chain appears directly in the formula body, with each branch providing its own `url` and `sha256`. Private repos use `GitHubPrivateRepositoryReleaseDownloadStrategy` (from `scripts/github_prv_repo_download_strategy.rb`), which reads the GitHub token in this order: an owner-scoped `HOMEBREW_GITHUB_TEAM_<OWNER>_API_TOKEN` (owner upcased, non-alphanumerics to `_`, e.g. `benbenbang` to `BENBENBANG`), then `HOMEBREW_GITHUB_API_TOKEN`, then `GITHUB_TOKEN`. The owner-scoped var lets personal and org repos each use their own PAT.
+**Inline platform conditionals** (`Formula/csl.rb`, `Formula/rigup.rb`) - the `if OS.mac? && Hardware::CPU.arm?` chain appears directly in the formula body, with each branch providing its own `url` and `sha256`. Private repos use `GitHubPrivateRepositoryReleaseDownloadStrategy` (from `scripts/github_prv_repo_download_strategy.rb`), which reads the GitHub token in this order: an owner-scoped `HOMEBREW_GITHUB_TEAM_<OWNER>_API_TOKEN` (owner upcased, non-alphanumerics to `_`, e.g. `benbenbang` to `BENBENBANG`), then `HOMEBREW_GITHUB_API_TOKEN`, then `GITHUB_TOKEN`. The owner-scoped var lets personal and org repos each use their own PAT.
 
 **Source builds** (`Formula/uv-shell.rb`) - clone from a git tag + revision, build with `cargo`/`go`/etc., then install.
 

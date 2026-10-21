@@ -21,7 +21,7 @@ utilize the `package.rb`
 Examples:
 ```bash
 # Update version + SHA256s (binary release)
-ruby package.rb --assets benbenbang/prjconf-cli -f Formula/pcg.rb -v 1.11.0
+ruby package.rb --assets benbenbang/rigup -f Formula/rigup.rb -v v3.0.0
 
 # Update SHA256s only, no version bump
 ruby ./package.rb --assets benbenbang/consilium -f Formula/csl.rb
