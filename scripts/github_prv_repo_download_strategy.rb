@@ -7,7 +7,6 @@ class GitHubPrivateRepositoryReleaseDownloadStrategy < CurlDownloadStrategy
   def initialize(url, name, version, **meta)
     super
     parse_url_pattern
-    set_github_token
   end
 
   def parse_url_pattern
@@ -22,6 +21,11 @@ class GitHubPrivateRepositoryReleaseDownloadStrategy < CurlDownloadStrategy
   private
 
   def _fetch(url:, resolved_url:, timeout:)
+    # Read the token only when downloading. Homebrew rebuilds this strategy
+    # inside the token-less build process (e.g. `resource.stage`), where the
+    # download is already cached, so raising at construction would break it.
+    set_github_token
+
     # Use GitHub API to get the download URL for the specific asset
     api_url = "https://api.github.com/repos/#{@owner}/#{@repo}/releases/tags/#{@tag}"
 
